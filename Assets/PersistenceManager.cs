@@ -11,9 +11,9 @@ public class PersistenceManager : MonoBehaviour
     public string TopPlayerName;
     public int HighestScore;
 
-    private PersistenceManager instance;
+    private static PersistenceManager instance;
 
-    public PersistenceManager GetInstance()
+    public static PersistenceManager GetInstance()
     {
         if (instance == null)
         {
@@ -24,7 +24,7 @@ public class PersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance!=null)
+        if(instance!=null && instance != this)
         {
             Destroy(gameObject);
         }
@@ -67,6 +67,11 @@ public class PersistenceManager : MonoBehaviour
             HighestScore = data.HighestScore;
             TopPlayerName = data.TopPlayerName;
         }
+        else
+        {
+            HighestScore = 10;
+            TopPlayerName = "THE DUDE";
+        }
     }
 
     private string GetHighScorePath()
@@ -79,5 +84,11 @@ public class PersistenceManager : MonoBehaviour
     {
         public string TopPlayerName;
         public int HighestScore;
+    }
+
+    internal void SetHighestScore(int m_Points)
+    {
+        HighestScore = m_Points;
+        TopPlayerName = CurrentPlayerName;
     }
 }

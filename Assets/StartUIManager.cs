@@ -27,7 +27,9 @@ public class StartUIManager : MonoBehaviour
     {
         bool canStart = (playerNameInput.text.Length > 0);
         startButton.enabled = canStart;
-        
+        PersistenceManager.GetInstance().CurrentPlayerName = playerNameInput.text;
+
+
     }
 
     public void StartGame()
